@@ -1,0 +1,1 @@
+ALTER TABLE "restaurants" ADD COLUMN "display_order" integer DEFAULT 1000 NOT NULL;

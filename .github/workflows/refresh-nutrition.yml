@@ -1,0 +1,31 @@
+name: Refresh nutrition data
+
+on:
+  schedule:
+    - cron: "17 9 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: nutrition-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: ${{ secrets.MACROFAST_DATABASE_URL }}
+      INGESTION_USER_AGENT: ${{ secrets.MACROFAST_INGESTION_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Verify database secret
+        run: test -n "$DATABASE_URL"
+      - name: Apply migrations and synchronize restaurant catalog
+        run: npm run db:migrate
+      - name: Refresh every registered adapter
+        run: npm run scrape all

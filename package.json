@@ -1,0 +1,44 @@
+{
+  "name": "macrofast",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
+    "lint": "node node_modules/eslint/bin/eslint.js .",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "test:watch": "node node_modules/vitest/vitest.mjs",
+    "db:generate": "node node_modules/drizzle-kit/bin.cjs generate",
+    "db:migrate": "node --import tsx src/db/migrate.ts",
+    "scrape": "node --import tsx src/scripts/scrape.ts",
+    "refresh": "npm run db:migrate && npm run scrape all"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "dotenv": "^17.2.2",
+    "drizzle-orm": "^0.45.2",
+    "next": "^16.3.5",
+    "postgres": "^3.4.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.1",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "drizzle-kit": "^0.31.4",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "^16.3.5",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}
