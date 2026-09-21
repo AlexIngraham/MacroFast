@@ -12,13 +12,20 @@ export interface SourceDefinition {
   type: SourceType;
 }
 
-export interface SourceDocument {
-  body: string;
+export interface SourceMetadata {
   fetchedAt: Date;
   sourceLastUpdated: Date | null;
   etag: string | null;
   lastModified: string | null;
   contentType: string | null;
+}
+
+export interface SourceDocument extends SourceMetadata {
+  body: string;
+}
+
+export interface BinarySourceDocument extends SourceMetadata {
+  bytes: Uint8Array;
 }
 
 export interface RestaurantAdapter {
@@ -29,6 +36,11 @@ export interface RestaurantAdapter {
   minimumExpectedItems: number;
   fetch(): Promise<SourceDocument>;
   parse(document: SourceDocument): NormalizedFood[];
+  /**
+   * Loads the committed fixture so `npm run scrape <key> -- --fixture` can
+   * exercise parsing and validation without a network request or database.
+   */
+  fixture?(): Promise<SourceDocument>;
 }
 
 export interface QualityIssue {

@@ -11,7 +11,17 @@ export function slugify(value: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export function foodSlug(restaurantSlug: string, name: string, servingSize?: string | null): string {
+/**
+ * `variant` separates items an official chart lists under the same name and
+ * serving size in different tables, such as a kid's-portion chart.
+ */
+export function foodSlug(
+  restaurantSlug: string,
+  name: string,
+  servingSize?: string | null,
+  variant?: string | null,
+): string {
   const size = servingSize && !name.toLowerCase().includes(servingSize.toLowerCase()) ? `-${servingSize}` : "";
-  return slugify(`${restaurantSlug}-${name}${size}`);
+  const suffix = variant ? `-${variant}` : "";
+  return slugify(`${restaurantSlug}-${name}${size}${suffix}`);
 }

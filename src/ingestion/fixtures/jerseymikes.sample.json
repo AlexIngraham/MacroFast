@@ -1,0 +1,785 @@
+{
+  "catalogUrl": "https://subs.jerseymikes.com/nutrition/data",
+  "catalog": [
+    {
+      "id": "1",
+      "name": "Cold Subs",
+      "products": [
+        {
+          "id": "2",
+          "name": "#3 Ham and Provolone",
+          "sizes": [
+            {
+              "id": "1",
+              "name": "Mini"
+            },
+            {
+              "id": "2",
+              "name": "Regular"
+            },
+            {
+              "id": "3",
+              "name": "Giant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "name": "Sides, Drinks, & Desserts",
+      "products": [
+        {
+          "id": "87",
+          "name": "Fountain Drink",
+          "sizes": [
+            {
+              "id": "2",
+              "name": "Regular"
+            }
+          ]
+        },
+        {
+          "id": "715",
+          "name": "Hot Chopped Pepper Relish",
+          "sizes": [
+            {
+              "id": "22",
+              "name": "16 oz"
+            }
+          ]
+        },
+        {
+          "id": "113",
+          "name": "Cookie",
+          "sizes": [
+            {
+              "id": "2",
+              "name": "Regular"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Breakfast",
+      "products": [
+        {
+          "id": "137",
+          "name": "#1 Porkroll, Egg and Cheese",
+          "sizes": [
+            {
+              "id": "2",
+              "name": "Regular"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "categoryId": "1",
+      "productId": "2",
+      "sizeId": "1",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "2",
+            "name": "Ham",
+            "inclusion_type": "D",
+            "ingredient_type_id": "M",
+            "nutrition__total_calories__cal": "56.178000",
+            "nutrition__total_fat__g": "2.142000",
+            "nutrition__saturated_fat__g": ".810000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": "19.404000",
+            "nutrition__sodium__mg": "478.368000",
+            "nutrition__total_carbohydrate__g": "1.026000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "1.026000",
+            "nutrition__protein__g": "8.460000"
+          },
+          {
+            "ingredient_id": "23",
+            "name": "Provolone",
+            "inclusion_type": "D",
+            "ingredient_type_id": "C",
+            "nutrition__total_calories__cal": "78.448000",
+            "nutrition__total_fat__g": "5.968000",
+            "nutrition__saturated_fat__g": "3.560000",
+            "nutrition__trans_fat__g": ".232000",
+            "nutrition__cholesterol__mg": "16.784000",
+            "nutrition__sodium__mg": "175.768000",
+            "nutrition__total_carbohydrate__g": ".496000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".064000",
+            "nutrition__protein__g": "5.680000"
+          },
+          {
+            "ingredient_id": "26",
+            "name": "Olive Oil Blend",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "124.950000",
+            "nutrition__total_fat__g": "14.000000",
+            "nutrition__saturated_fat__g": "1.680000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "27",
+            "name": "Red Wine Vinegar",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "1.500000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": ".300000",
+            "nutrition__dietary_fiber__g": ".015000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "38",
+            "name": "Oregano",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": ".661144",
+            "nutrition__total_fat__g": ".010648",
+            "nutrition__saturated_fat__g": ".003872",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".062392",
+            "nutrition__total_carbohydrate__g": ".171952",
+            "nutrition__dietary_fiber__g": ".106040",
+            "nutrition__sugars__g": ".010208",
+            "nutrition__protein__g": ".022440"
+          },
+          {
+            "ingredient_id": "42",
+            "name": "Salt",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": ".000000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "31.864359",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "65",
+            "name": "White Bread",
+            "inclusion_type": "D",
+            "ingredient_type_id": "B",
+            "nutrition__total_calories__cal": "203.758500",
+            "nutrition__total_fat__g": "1.927200",
+            "nutrition__saturated_fat__g": ".217800",
+            "nutrition__trans_fat__g": ".009900",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "458.845200",
+            "nutrition__total_carbohydrate__g": "38.722200",
+            "nutrition__dietary_fiber__g": "1.590600",
+            "nutrition__sugars__g": "1.145100",
+            "nutrition__protein__g": "7.662600"
+          },
+          {
+            "ingredient_id": "73",
+            "name": "Lettuce",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "7.940000",
+            "nutrition__total_fat__g": ".080000",
+            "nutrition__saturated_fat__g": ".020000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "5.680000",
+            "nutrition__total_carbohydrate__g": "1.680000",
+            "nutrition__dietary_fiber__g": ".640000",
+            "nutrition__sugars__g": "1.060000",
+            "nutrition__protein__g": ".520000"
+          },
+          {
+            "ingredient_id": "75",
+            "name": "Tomatoes",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "6.940000",
+            "nutrition__total_fat__g": ".080000",
+            "nutrition__saturated_fat__g": ".020000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "1.920000",
+            "nutrition__total_carbohydrate__g": "1.500000",
+            "nutrition__dietary_fiber__g": ".460000",
+            "nutrition__sugars__g": "1.020000",
+            "nutrition__protein__g": ".340000"
+          },
+          {
+            "ingredient_id": "76",
+            "name": "Onions",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "2.268000",
+            "nutrition__total_fat__g": ".006000",
+            "nutrition__saturated_fat__g": ".002000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".226000",
+            "nutrition__total_carbohydrate__g": ".530000",
+            "nutrition__dietary_fiber__g": ".096000",
+            "nutrition__sugars__g": ".240000",
+            "nutrition__protein__g": ".062000"
+          },
+          {
+            "ingredient_id": "29",
+            "name": "Jalapeño Peppers ",
+            "inclusion_type": "A",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "2.673000",
+            "nutrition__total_fat__g": ".033000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "175.296000",
+            "nutrition__total_carbohydrate__g": ".561000",
+            "nutrition__dietary_fiber__g": ".231000",
+            "nutrition__sugars__g": ".264000",
+            "nutrition__protein__g": ".066000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "1",
+      "productId": "2",
+      "sizeId": "2",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "2",
+            "name": "Ham",
+            "inclusion_type": "D",
+            "ingredient_type_id": "M",
+            "nutrition__total_calories__cal": "110.795500",
+            "nutrition__total_fat__g": "4.224500",
+            "nutrition__saturated_fat__g": "1.597500",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": "38.269000",
+            "nutrition__sodium__mg": "943.448000",
+            "nutrition__total_carbohydrate__g": "2.023500",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "2.023500",
+            "nutrition__protein__g": "16.685000"
+          },
+          {
+            "ingredient_id": "23",
+            "name": "Provolone",
+            "inclusion_type": "D",
+            "ingredient_type_id": "C",
+            "nutrition__total_calories__cal": "117.672000",
+            "nutrition__total_fat__g": "8.952000",
+            "nutrition__saturated_fat__g": "5.340000",
+            "nutrition__trans_fat__g": ".348000",
+            "nutrition__cholesterol__mg": "25.176000",
+            "nutrition__sodium__mg": "263.652000",
+            "nutrition__total_carbohydrate__g": ".744000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".096000",
+            "nutrition__protein__g": "8.520000"
+          },
+          {
+            "ingredient_id": "26",
+            "name": "Olive Oil Blend",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "249.900000",
+            "nutrition__total_fat__g": "28.000000",
+            "nutrition__saturated_fat__g": "3.360000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "27",
+            "name": "Red Wine Vinegar",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "3.000000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": ".600000",
+            "nutrition__dietary_fiber__g": ".030000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "38",
+            "name": "Oregano",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": ".976690",
+            "nutrition__total_fat__g": ".015730",
+            "nutrition__saturated_fat__g": ".005720",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".092170",
+            "nutrition__total_carbohydrate__g": ".254020",
+            "nutrition__dietary_fiber__g": ".156650",
+            "nutrition__sugars__g": ".015080",
+            "nutrition__protein__g": ".033150"
+          },
+          {
+            "ingredient_id": "42",
+            "name": "Salt",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": ".000000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "48.345924",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "65",
+            "name": "White Bread",
+            "inclusion_type": "D",
+            "ingredient_type_id": "B",
+            "nutrition__total_calories__cal": "308.725000",
+            "nutrition__total_fat__g": "2.920000",
+            "nutrition__saturated_fat__g": ".330000",
+            "nutrition__trans_fat__g": ".015000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "695.220000",
+            "nutrition__total_carbohydrate__g": "58.670000",
+            "nutrition__dietary_fiber__g": "2.410000",
+            "nutrition__sugars__g": "1.735000",
+            "nutrition__protein__g": "11.610000"
+          },
+          {
+            "ingredient_id": "73",
+            "name": "Lettuce",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "11.910000",
+            "nutrition__total_fat__g": ".120000",
+            "nutrition__saturated_fat__g": ".030000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "8.520000",
+            "nutrition__total_carbohydrate__g": "2.520000",
+            "nutrition__dietary_fiber__g": ".960000",
+            "nutrition__sugars__g": "1.590000",
+            "nutrition__protein__g": ".780000"
+          },
+          {
+            "ingredient_id": "75",
+            "name": "Tomatoes",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "10.410000",
+            "nutrition__total_fat__g": ".120000",
+            "nutrition__saturated_fat__g": ".030000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "2.880000",
+            "nutrition__total_carbohydrate__g": "2.250000",
+            "nutrition__dietary_fiber__g": ".690000",
+            "nutrition__sugars__g": "1.530000",
+            "nutrition__protein__g": ".510000"
+          },
+          {
+            "ingredient_id": "76",
+            "name": "Onions",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "3.402000",
+            "nutrition__total_fat__g": ".009000",
+            "nutrition__saturated_fat__g": ".003000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".339000",
+            "nutrition__total_carbohydrate__g": ".795000",
+            "nutrition__dietary_fiber__g": ".144000",
+            "nutrition__sugars__g": ".360000",
+            "nutrition__protein__g": ".093000"
+          },
+          {
+            "ingredient_id": "29",
+            "name": "Jalapeño Peppers ",
+            "inclusion_type": "A",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "4.050000",
+            "nutrition__total_fat__g": ".050000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "265.600000",
+            "nutrition__total_carbohydrate__g": ".850000",
+            "nutrition__dietary_fiber__g": ".350000",
+            "nutrition__sugars__g": ".400000",
+            "nutrition__protein__g": ".100000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "1",
+      "productId": "2",
+      "sizeId": "3",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "2",
+            "name": "Ham",
+            "inclusion_type": "D",
+            "ingredient_type_id": "M",
+            "nutrition__total_calories__cal": "185.699500",
+            "nutrition__total_fat__g": "7.080500",
+            "nutrition__saturated_fat__g": "2.677500",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": "64.141000",
+            "nutrition__sodium__mg": "1581.272000",
+            "nutrition__total_carbohydrate__g": "3.391500",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "3.391500",
+            "nutrition__protein__g": "27.965000"
+          },
+          {
+            "ingredient_id": "23",
+            "name": "Provolone",
+            "inclusion_type": "D",
+            "ingredient_type_id": "C",
+            "nutrition__total_calories__cal": "196.120000",
+            "nutrition__total_fat__g": "14.920000",
+            "nutrition__saturated_fat__g": "8.900000",
+            "nutrition__trans_fat__g": ".580000",
+            "nutrition__cholesterol__mg": "41.960000",
+            "nutrition__sodium__mg": "439.420000",
+            "nutrition__total_carbohydrate__g": "1.240000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".160000",
+            "nutrition__protein__g": "14.200000"
+          },
+          {
+            "ingredient_id": "26",
+            "name": "Olive Oil Blend",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "499.800000",
+            "nutrition__total_fat__g": "56.000000",
+            "nutrition__saturated_fat__g": "6.720000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "27",
+            "name": "Red Wine Vinegar",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "6.000000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".000000",
+            "nutrition__total_carbohydrate__g": "1.200000",
+            "nutrition__dietary_fiber__g": ".060000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "38",
+            "name": "Oregano",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "1.878250",
+            "nutrition__total_fat__g": ".030250",
+            "nutrition__saturated_fat__g": ".011000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".177250",
+            "nutrition__total_carbohydrate__g": ".488500",
+            "nutrition__dietary_fiber__g": ".301250",
+            "nutrition__sugars__g": ".029000",
+            "nutrition__protein__g": ".063750"
+          },
+          {
+            "ingredient_id": "42",
+            "name": "Salt",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": ".000000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "96.691848",
+            "nutrition__total_carbohydrate__g": ".000000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "65",
+            "name": "White Bread",
+            "inclusion_type": "D",
+            "ingredient_type_id": "B",
+            "nutrition__total_calories__cal": "617.450000",
+            "nutrition__total_fat__g": "5.840000",
+            "nutrition__saturated_fat__g": ".660000",
+            "nutrition__trans_fat__g": ".030000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "1390.440000",
+            "nutrition__total_carbohydrate__g": "117.340000",
+            "nutrition__dietary_fiber__g": "4.820000",
+            "nutrition__sugars__g": "3.470000",
+            "nutrition__protein__g": "23.220000"
+          },
+          {
+            "ingredient_id": "73",
+            "name": "Lettuce",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "19.850000",
+            "nutrition__total_fat__g": ".200000",
+            "nutrition__saturated_fat__g": ".050000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "14.200000",
+            "nutrition__total_carbohydrate__g": "4.200000",
+            "nutrition__dietary_fiber__g": "1.600000",
+            "nutrition__sugars__g": "2.650000",
+            "nutrition__protein__g": "1.300000"
+          },
+          {
+            "ingredient_id": "75",
+            "name": "Tomatoes",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "17.350000",
+            "nutrition__total_fat__g": ".200000",
+            "nutrition__saturated_fat__g": ".050000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "4.800000",
+            "nutrition__total_carbohydrate__g": "3.750000",
+            "nutrition__dietary_fiber__g": "1.150000",
+            "nutrition__sugars__g": "2.550000",
+            "nutrition__protein__g": ".850000"
+          },
+          {
+            "ingredient_id": "76",
+            "name": "Onions",
+            "inclusion_type": "D",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "5.670000",
+            "nutrition__total_fat__g": ".015000",
+            "nutrition__saturated_fat__g": ".005000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": ".565000",
+            "nutrition__total_carbohydrate__g": "1.325000",
+            "nutrition__dietary_fiber__g": ".240000",
+            "nutrition__sugars__g": ".600000",
+            "nutrition__protein__g": ".155000"
+          },
+          {
+            "ingredient_id": "29",
+            "name": "Jalapeño Peppers ",
+            "inclusion_type": "A",
+            "ingredient_type_id": "T",
+            "nutrition__total_calories__cal": "8.100000",
+            "nutrition__total_fat__g": ".100000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "531.200000",
+            "nutrition__total_carbohydrate__g": "1.700000",
+            "nutrition__dietary_fiber__g": ".700000",
+            "nutrition__sugars__g": ".800000",
+            "nutrition__protein__g": ".200000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "19",
+      "productId": "113",
+      "sizeId": "2",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "473",
+            "name": "Chocolate Chunk Cookie",
+            "inclusion_type": "D",
+            "ingredient_type_id": "F",
+            "nutrition__total_calories__cal": "280.000000",
+            "nutrition__total_fat__g": "14.000000",
+            "nutrition__saturated_fat__g": "8.000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": "35.000000",
+            "nutrition__sodium__mg": "220.000000",
+            "nutrition__total_carbohydrate__g": "37.000000",
+            "nutrition__dietary_fiber__g": "2.000000",
+            "nutrition__sugars__g": "21.000000",
+            "nutrition__protein__g": "3.000000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "19",
+      "productId": "87",
+      "sizeId": "2",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "331",
+            "name": "Pepsi",
+            "inclusion_type": "D",
+            "ingredient_type_id": "F",
+            "nutrition__total_calories__cal": "278.740000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "59.180000",
+            "nutrition__total_carbohydrate__g": "75.900000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "75.680000",
+            "nutrition__protein__g": ".000000"
+          },
+          {
+            "ingredient_id": "332",
+            "name": "Diet Pepsi",
+            "inclusion_type": "R",
+            "ingredient_type_id": "F",
+            "nutrition__total_calories__cal": "1.100000",
+            "nutrition__total_fat__g": ".000000",
+            "nutrition__saturated_fat__g": ".000000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "103.180000",
+            "nutrition__total_carbohydrate__g": ".220000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": ".000000",
+            "nutrition__protein__g": ".000000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "14",
+      "productId": "137",
+      "sizeId": "2",
+      "detail": {
+        "product_ingredients": [
+          {
+            "ingredient_id": "22",
+            "name": "White American Cheese",
+            "inclusion_type": "D",
+            "ingredient_type_id": "C",
+            "nutrition__total_calories__cal": "101.850000",
+            "nutrition__total_fat__g": "8.690000",
+            "nutrition__saturated_fat__g": "5.440000",
+            "nutrition__trans_fat__g": ".150000",
+            "nutrition__cholesterol__mg": "26.430000",
+            "nutrition__sodium__mg": "479.710000",
+            "nutrition__total_carbohydrate__g": "2.060000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "1.190000",
+            "nutrition__protein__g": "4.680000"
+          },
+          {
+            "ingredient_id": "65",
+            "name": "White Bread",
+            "inclusion_type": "D",
+            "ingredient_type_id": "B",
+            "nutrition__total_calories__cal": "308.725000",
+            "nutrition__total_fat__g": "2.920000",
+            "nutrition__saturated_fat__g": ".330000",
+            "nutrition__trans_fat__g": ".015000",
+            "nutrition__cholesterol__mg": ".000000",
+            "nutrition__sodium__mg": "695.220000",
+            "nutrition__total_carbohydrate__g": "58.670000",
+            "nutrition__dietary_fiber__g": "2.410000",
+            "nutrition__sugars__g": "1.735000",
+            "nutrition__protein__g": "11.610000"
+          },
+          {
+            "ingredient_id": "175",
+            "name": "Pork Roll",
+            "inclusion_type": "D",
+            "ingredient_type_id": "M",
+            "nutrition__total_calories__cal": "296.140000",
+            "nutrition__total_fat__g": "26.325000",
+            "nutrition__saturated_fat__g": "11.505000",
+            "nutrition__trans_fat__g": ".000000",
+            "nutrition__cholesterol__mg": "65.812500",
+            "nutrition__sodium__mg": "954.265000",
+            "nutrition__total_carbohydrate__g": "1.657500",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "1.657500",
+            "nutrition__protein__g": "14.820000"
+          },
+          {
+            "ingredient_id": "176",
+            "name": "Egg",
+            "inclusion_type": "D",
+            "ingredient_type_id": "M",
+            "nutrition__total_calories__cal": "131.120000",
+            "nutrition__total_fat__g": "9.660000",
+            "nutrition__saturated_fat__g": "2.940000",
+            "nutrition__trans_fat__g": ".540000",
+            "nutrition__cholesterol__mg": "243.760000",
+            "nutrition__sodium__mg": "127.600000",
+            "nutrition__total_carbohydrate__g": "1.420000",
+            "nutrition__dietary_fiber__g": ".000000",
+            "nutrition__sugars__g": "1.220000",
+            "nutrition__protein__g": "8.800000"
+          }
+        ]
+      }
+    },
+    {
+      "categoryId": "19",
+      "productId": "715",
+      "sizeId": "22",
+      "detail": {
+        "product_ingredients": []
+      }
+    }
+  ]
+}

@@ -19,6 +19,11 @@ Official source
 
 - `src/ingestion/adapters`: one source-specific parser per restaurant. It knows source markup, not database details.
 - `src/ingestion`: shared fetch policy, adapter registry, validation, change detection, and run orchestration.
+- `src/ingestion/fetch.ts`: the only place that talks to a restaurant. It sends the configurable user agent, times out, retries a transient 5xx or 429 with backoff, honours `Retry-After`, and refuses to retry a 403 or 404.
+- `src/ingestion/pdf.ts`: turns an official PDF into page-delimited text and reads the one row shape every flattened nutrition chart shares, so a PDF adapter's `parse` stays a pure function over a string.
+- `src/ingestion/parse.ts`: shared cell reading, whitespace normalization and duplicate merging.
+
+An adapter's `fetch` performs every network request and any format conversion; `parse` is synchronous, takes only the returned document and is exercised by a committed fixture. An adapter that needs many requests, as Jersey Mike's does, combines them into one document body so parsing, content hashing and fixtures stay unchanged.
 - `src/db`: Drizzle schema, connection lifecycle, migrations, and read queries.
 - `src/lib`: framework-independent metrics, classifications, search-intent parsing, and filter parsing.
 - `src/app`: routes and API endpoints.
@@ -62,11 +67,17 @@ Rankings calculate ratios in SQL or application code. Derived values are not per
 
 Null and zero denominators are excluded. Classifications are explicit objective rules. Subjective concepts such as taste and “fan favorite” are not inferred from nutrition.
 
+## Components versus composed meals
+
+Several chains publish ingredients rather than finished meals. Those rows are imported faithfully and classified `component`, so an ingredient can never rank as a meal: Chipotle's chart is entirely components and drinks, Subway contributes breads and individual proteins, and El Pollo Loco's à-la-carte grilled pieces are components.
+
+Ingestion does not compose meals. Nothing invents a burrito by adding a protein to rice and beans. A later meal-builder can read the `component` rows and sum them, which needs no schema change: `foods` already carries every nutrient, a serving size and a stable key. Jersey Mike's is the one case where a composed total is imported, because the official page itself publishes that total for a product size and the adapter reproduces the page's own default selection and rounding.
+
 ## Next implementation increments
 
-1. Run the Chick-fil-A adapter against PostgreSQL in the deployment environment and review the initial warnings.
-2. Add an official Chipotle PDF adapter with PDF fixtures and a component/customization model.
-3. Inspect authenticated/location-dependent public web calls for McDonald's, Taco Bell, and Wendy's and document terms before choosing endpoints.
-4. Add admin authentication and issue-resolution actions before exposing `/admin/data-health` outside a trusted environment.
-5. Schedule ingestion, alert on failed/stale runs, and add database integration tests in CI.
+1. Add a Buffalo Wild Wings adapter from the quarterly nutrition guide, resolving its dated link the way Subway and El Pollo Loco do.
+2. Verify the first-party product requests behind the McDonald's nutrition calculator and document terms before choosing an endpoint.
+3. Add admin authentication and issue-resolution actions before exposing `/admin/data-health` outside a trusted environment.
+4. Alert on failed, partial or stale runs, and add database integration tests in CI.
+5. Add a meal-composition model on top of the imported `component` rows for Chipotle-style builds.
 6. Add editorial/user-rating entities if runner-up or taste-based recommendations are introduced.

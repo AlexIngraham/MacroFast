@@ -126,6 +126,15 @@ export async function runIngestion(adapter: RestaurantAdapter): Promise<Ingestio
       .filter((id, index, all) => all.indexOf(id) !== index);
     if (duplicateIds.length) throw new Error(`Parser produced duplicate source IDs: ${[...new Set(duplicateIds)].join(", ")}`);
 
+    // Public slugs are unique across every restaurant, so catch a collision here
+    // rather than as a constraint violation part-way through the transaction.
+    const duplicateSlugs = parsedFoods
+      .map((food) => food.slug)
+      .filter((slug, index, all) => all.indexOf(slug) !== index);
+    if (duplicateSlugs.length) {
+      throw new Error(`Parser produced duplicate public slugs: ${[...new Set(duplicateSlugs)].join(", ")}`);
+    }
+
     const outcome = await db.transaction(async (tx) => {
       await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${restaurant.slug}))`);
       const existingRows = await tx.select().from(foods).where(eq(foods.restaurantId, restaurant.id));

@@ -1,45 +1,88 @@
 import "dotenv/config";
-import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import { closeDatabase } from "@/db/client";
 import { allAdapters, getAdapter, listAdapters } from "@/ingestion/registry";
+import { createIngestionLogger } from "@/ingestion/logger";
 import { runIngestion } from "@/ingestion/run";
+import type { RestaurantAdapter, SourceDocument } from "@/ingestion/types";
 import { validateFood } from "@/ingestion/validation";
-import { parseChickfila } from "@/ingestion/adapters/chickfila";
 
-async function runFixture(): Promise<void> {
-  const path = fileURLToPath(new URL("../ingestion/fixtures/chickfila.sample.html", import.meta.url));
-  const body = await readFile(path, "utf8");
-  const items = parseChickfila({
-    body,
-    fetchedAt: new Date(),
-    sourceLastUpdated: null,
-    etag: null,
-    lastModified: null,
-    contentType: "text/html",
-  });
-  const rejected = items.filter((item) => !validateFood(item).accepted);
-  process.stdout.write(`Fixture parsed ${items.length} items; ${rejected.length} rejected. No database writes made.\n`);
-  if (rejected.length) process.exitCode = 1;
+type Mode = "ingest" | "fixture" | "dry-run";
+
+/** Parses and validates without touching the database, and reports what it found. */
+function report(adapter: RestaurantAdapter, document: SourceDocument, mode: Mode): boolean {
+  const logger = createIngestionLogger(adapter.key);
+  const foods = adapter.parse(document);
+  const rejected = foods.filter((food) => !validateFood(food).accepted);
+  const byItemType = new Map<string, number>();
+  for (const food of foods) {
+    const itemType = food.itemType ?? "unclassified";
+    byItemType.set(itemType, (byItemType.get(itemType) ?? 0) + 1);
+  }
+
+  logger.info(`Parsed ${foods.length} items (${[...byItemType].map(([type, count]) => `${type}: ${count}`).join(", ")})`);
+  for (const food of rejected.slice(0, 10)) {
+    const reasons = validateFood(food)
+      .issues.filter((issue) => issue.severity === "error")
+      .map((issue) => issue.message)
+      .join("; ");
+    logger.warn(`Rejected ${food.name}: ${reasons}`);
+  }
+
+  if (mode === "fixture") {
+    logger.info(`Fixture check complete; ${rejected.length} rejected. No database writes made.`);
+    return rejected.length === 0;
+  }
+
+  const shortfall = foods.length < adapter.minimumExpectedItems;
+  if (shortfall) {
+    logger.warn(
+      `Expected at least ${adapter.minimumExpectedItems} items but the parser returned ${foods.length}. Source format may have changed.`,
+    );
+  }
+  logger.info(`Dry run complete; ${rejected.length} rejected. No database writes made.`);
+  return !shortfall && rejected.length === 0;
 }
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const target = args.find((arg) => !arg.startsWith("--"));
   if (!target) throw new Error(`Choose an adapter: ${listAdapters().join(", ")}, or all`);
-  if (args.includes("--fixture")) return runFixture();
 
+  const mode: Mode = args.includes("--fixture") ? "fixture" : args.includes("--dry-run") ? "dry-run" : "ingest";
   const selected = target === "all" ? allAdapters() : [getAdapter(target)];
+  let failed = false;
+
   for (const adapter of selected) {
-    process.stdout.write(`Running ${adapter.restaurant.name} adapter ${adapter.version}...\n`);
+    const logger = createIngestionLogger(adapter.key);
+    logger.info(`Running the ${adapter.restaurant.name} adapter ${adapter.version} (${mode})`);
+
+    if (mode === "fixture") {
+      if (!adapter.fixture) {
+        logger.warn("No committed fixture, so fixture mode was skipped");
+        continue;
+      }
+      if (!report(adapter, await adapter.fixture(), mode)) failed = true;
+      continue;
+    }
+
+    if (mode === "dry-run") {
+      if (!report(adapter, await adapter.fetch(), mode)) failed = true;
+      continue;
+    }
+
     const result = await runIngestion(adapter);
-    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    logger.info(
+      `Status ${result.status}: fetched ${result.fetched}, inserted ${result.inserted}, updated ${result.updated}, unchanged ${result.unchanged}, deactivated ${result.deactivated}, rejected ${result.rejected}, warnings ${result.warnings}`,
+    );
+    if (result.status !== "succeeded") failed = true;
   }
+
+  if (failed) process.exitCode = 1;
 }
 
 main()
   .catch((error: unknown) => {
-    process.stderr.write(`${error instanceof Error ? error.stack ?? error.message : String(error)}\n`);
+    process.stderr.write(`${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`);
     process.exitCode = 1;
   })
   .finally(closeDatabase);
