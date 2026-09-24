@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { FoodListItem } from "@/lib/domain";
+import { itemRoleLabel } from "@/lib/item-role";
 import { formatMetric, proteinPer100Calories } from "@/lib/metrics";
 
 export function FoodTable({ foods, showRestaurant = true, selectable = true }: {
@@ -32,7 +33,7 @@ export function FoodTable({ foods, showRestaurant = true, selectable = true }: {
                 {selectable ? <td><input type="checkbox" name="ids" value={food.id} aria-label={`Compare ${food.name}`} /></td> : null}
                 <td>
                   <Link className="table-title" href={`/food/${food.slug}`}>{food.name}</Link>
-                  <span className="table-subtitle">{showRestaurant ? food.restaurantName : food.category}{food.servingSize ? ` · ${food.servingSize}` : ""}</span>
+                  <span className="table-subtitle">{showRestaurant ? food.restaurantName : food.category} · {itemRoleLabel(food.itemRole)}{food.servingSize ? ` · ${food.servingSize}` : ""}</span>
                 </td>
                 <td><strong>{formatMetric(food.calories)}</strong></td>
                 <td className="protein-cell"><strong>{formatMetric(food.proteinG, "g")}</strong></td>
@@ -57,7 +58,7 @@ function FoodCardCompact({ food, selectable }: { food: FoodListItem; selectable:
     <article className="compact-card">
       <div>
         <Link className="table-title" href={`/food/${food.slug}`}>{food.name}</Link>
-        <span className="table-subtitle">{food.restaurantName} · {food.category}</span>
+        <span className="table-subtitle">{food.restaurantName} · {itemRoleLabel(food.itemRole)} · {food.category}</span>
       </div>
       {selectable ? <input type="checkbox" name="ids" value={food.id} aria-label={`Compare ${food.name}`} /> : null}
       <div className="compact-macros">

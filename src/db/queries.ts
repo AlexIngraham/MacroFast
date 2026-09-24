@@ -1,7 +1,10 @@
-import { and, asc, count, desc, eq, ilike, inArray, lte, gte, or, sql, type SQL } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, inArray, lte, gte, ne, or, sql, type SQL } from "drizzle-orm";
+import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { foods, restaurants, scrapeRuns, dataQualityIssues } from "@/db/schema";
 import { getDatabase } from "@/db/client";
+import { itemRoleSql, scopeConditionSql } from "@/db/item-role-sql";
 import type { FoodFilters, FoodListItem, RestaurantSummary } from "@/lib/domain";
+import type { FoodScope } from "@/lib/item-role";
 
 const foodSelection = {
   id: foods.id,
@@ -22,6 +25,7 @@ const foodSelection = {
   restaurantId: restaurants.id,
   restaurantName: restaurants.name,
   restaurantSlug: restaurants.slug,
+  itemRole: itemRoleSql(),
   calories: foods.calories,
   proteinG: foods.proteinG,
   carbsG: foods.carbsG,
@@ -35,13 +39,13 @@ const foodSelection = {
 };
 
 function foodConditions(filters: FoodFilters): SQL[] {
-  const conditions: SQL[] = [eq(foods.isAvailable, true)];
+  const conditions: SQL[] = [eq(foods.isAvailable, true), scopeConditionSql(filters.scope)];
   if (filters.query) {
     const pattern = `%${filters.query.replace(/[%_]/g, "\\$&")}%`;
     conditions.push(or(ilike(foods.name, pattern), ilike(restaurants.name, pattern))!);
   }
   if (filters.restaurant) conditions.push(eq(restaurants.slug, filters.restaurant));
-  if (filters.category) conditions.push(sql`${filters.category} = any(${foods.categories})`);
+  if (filters.category) conditions.push(eq(foods.category, filters.category));
   if (filters.maxCalories !== undefined) conditions.push(lte(foods.calories, filters.maxCalories));
   if (filters.minProtein !== undefined) conditions.push(gte(foods.proteinG, filters.minProtein));
   if (filters.maxFat !== undefined) conditions.push(lte(foods.fatG, filters.maxFat));
@@ -74,25 +78,35 @@ function foodOrder(sort: FoodFilters["sort"]): SQL {
 
 export async function listFoods(filters: FoodFilters): Promise<{ items: FoodListItem[]; total: number }> {
   const db = getDatabase();
-  const conditions = foodConditions(filters);
-  const where = and(...conditions);
   const [items, totalRows] = await Promise.all([
-    db
-      .select(foodSelection)
-      .from(foods)
-      .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
-      .where(where)
-      .orderBy(foodOrder(filters.sort), asc(foods.name))
-      .limit(filters.limit)
-      .offset(filters.offset),
-    db
-      .select({ count: count() })
-      .from(foods)
-      .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
-      .where(where),
+    buildFoodItemsQuery(db, filters),
+    buildFoodCountQuery(db, filters),
   ]);
 
   return { items, total: totalRows[0]?.count ?? 0 };
+}
+
+type Database = PostgresJsDatabase<typeof import("@/db/schema")>;
+
+export function buildFoodItemsQuery(db: Database, filters: FoodFilters) {
+  const conditions = foodConditions(filters);
+  const where = and(...conditions);
+  return db
+    .select(foodSelection)
+    .from(foods)
+    .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
+    .where(where)
+    .orderBy(foodOrder(filters.sort), asc(foods.name))
+    .limit(filters.limit)
+    .offset(filters.offset);
+}
+
+export function buildFoodCountQuery(db: Database, filters: FoodFilters) {
+  return db
+    .select({ count: count() })
+    .from(foods)
+    .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
+    .where(and(...foodConditions(filters)));
 }
 
 export async function getFoodBySlug(slug: string): Promise<FoodListItem | null> {
@@ -115,16 +129,61 @@ export async function getFoodsByIds(ids: string[]): Promise<FoodListItem[]> {
     .limit(4);
 }
 
-export async function listCategories(restaurantSlug?: string): Promise<string[]> {
-  const conditions = [eq(foods.isAvailable, true)];
+export async function listCategories(restaurantSlug?: string, scope: FoodScope = "all"): Promise<string[]> {
+  const conditions: SQL[] = [eq(foods.isAvailable, true), scopeConditionSql(scope)];
   if (restaurantSlug) conditions.push(eq(restaurants.slug, restaurantSlug));
   const rows = await getDatabase()
-    .selectDistinct({ category: sql<string>`unnest(${foods.categories})` })
+    .selectDistinct({ category: foods.category })
     .from(foods)
     .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
     .where(and(...conditions))
     .orderBy(sql`1`);
   return rows.map((row) => row.category);
+}
+
+export interface RestaurantDiscoveryProfile {
+  mealCount: number;
+  buildCount: number;
+}
+
+export async function getRestaurantDiscoveryProfile(slug: string): Promise<RestaurantDiscoveryProfile> {
+  const [counts] = await getDatabase()
+    .select({
+      mealCount: sql<number>`count(*) filter (where ${scopeConditionSql("meals")})`.mapWith(Number),
+      buildCount: sql<number>`count(*) filter (where ${scopeConditionSql("builds")})`.mapWith(Number),
+    })
+    .from(foods)
+    .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
+    .where(and(eq(foods.isAvailable, true), eq(restaurants.slug, slug)));
+
+  return counts ?? { mealCount: 0, buildCount: 0 };
+}
+
+export async function listSimilarFoods(food: FoodListItem, limit = 4): Promise<FoodListItem[]> {
+  const conditions: SQL[] = [
+    eq(foods.isAvailable, true),
+    ne(foods.id, food.id),
+    eq(restaurants.slug, food.restaurantSlug),
+    sql`${itemRoleSql()} = ${food.itemRole}`,
+  ];
+  if (food.calories !== null) {
+    conditions.push(gte(foods.calories, Math.max(0, food.calories - 175)));
+    conditions.push(lte(foods.calories, food.calories + 175));
+  }
+
+  return getDatabase()
+    .select(foodSelection)
+    .from(foods)
+    .innerJoin(restaurants, eq(foods.restaurantId, restaurants.id))
+    .where(and(...conditions))
+    .orderBy(
+      food.calories === null
+        ? sql`${foods.proteinG} desc nulls last`
+        : sql`abs(${foods.calories} - ${food.calories}) asc nulls last`,
+      sql`${foods.proteinG} desc nulls last`,
+      asc(foods.name),
+    )
+    .limit(limit);
 }
 
 export async function listRestaurantSummaries(): Promise<RestaurantSummary[]> {

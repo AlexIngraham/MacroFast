@@ -34,7 +34,8 @@ export function classifyFood(food: NutritionValues): ObjectiveClassification[] {
     calories <= 750 &&
     efficiency !== null &&
     efficiency >= 8 &&
-    (food.fiberG ?? 0) >= 3 &&
+    food.fiberG !== null &&
+    food.fiberG >= 3 &&
     (food.sodiumMg === null || food.sodiumMg <= 1_500)
   ) {
     labels.push("Macro MVP");

@@ -18,7 +18,7 @@ export default async function FoodsPage({ searchParams }: {
   const [result, restaurants, categories] = await Promise.all([
     safeQuery(() => listFoods(filters), { items: [], total: 0 }),
     safeQuery(listRestaurantSummaries, []),
-    safeQuery(() => listCategories(filters.restaurant), []),
+    filters.restaurant ? safeQuery(() => listCategories(filters.restaurant, filters.scope), []) : Promise.resolve({ data: [], available: true }),
   ]);
 
   return (
@@ -29,7 +29,7 @@ export default async function FoodsPage({ searchParams }: {
         <p>Filter verified menu nutrition by the numbers that matter to you.</p>
       </header>
       {!result.available ? <DatabaseNotice /> : null}
-      <FilterBar filters={filters} restaurants={restaurants.data} categories={categories.data} />
+      <FilterBar filters={filters} restaurants={restaurants.data} categories={categories.data} pathname="/foods" />
       <div className="result-heading">
         <div><strong>{result.data.total}</strong> matching items</div>
         <span>Nutrition values reflect standard recipes from the linked source.</span>

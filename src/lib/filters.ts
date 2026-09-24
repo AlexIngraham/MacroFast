@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { FoodFilters, FoodSort } from "@/lib/domain";
+import { FOOD_SCOPES, type FoodScope } from "@/lib/item-role";
 import { parseSearchIntent } from "@/lib/search-intent";
 
 const optionalNumber = z.coerce.number().finite().nonnegative().optional().catch(undefined);
@@ -15,6 +16,7 @@ const sortSchema = z
     "fiber_desc",
   ])
   .catch("protein_efficiency_desc");
+const scopeSchema = z.enum(FOOD_SCOPES);
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -22,7 +24,7 @@ function first(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
 }
 
-export function parseFoodFilters(params: SearchParams): FoodFilters {
+export function parseFoodFilters(params: SearchParams, defaultScope: FoodScope = "meals"): FoodFilters {
   const rawQuery = first(params.q)?.trim() ?? "";
   const intent = parseSearchIntent(rawQuery);
   const maxCalories = optionalNumber.parse(first(params.maxCalories)) ?? intent.maxCalories;
@@ -33,7 +35,8 @@ export function parseFoodFilters(params: SearchParams): FoodFilters {
   return {
     query: intent.text || undefined,
     restaurant: first(params.restaurant) || undefined,
-    category: first(params.category) || undefined,
+    category: first(params.restaurant) ? first(params.category) || undefined : undefined,
+    scope: scopeSchema.catch(defaultScope).parse(first(params.scope)),
     maxCalories,
     minProtein,
     maxFat: optionalNumber.parse(first(params.maxFat)),

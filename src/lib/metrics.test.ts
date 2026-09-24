@@ -34,4 +34,10 @@ describe("nutrition metrics", () => {
       "Balanced Meal",
     ]);
   });
+
+  it("does not treat missing fiber as confirmed zero or sufficient fiber", () => {
+    const labels = classifyFood({ ...base, fiberG: null });
+    expect(labels).not.toContain("Macro MVP");
+    expect(labels).toContain("Cutting Pick");
+  });
 });

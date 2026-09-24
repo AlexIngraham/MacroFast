@@ -8,7 +8,7 @@ import { safeQuery } from "@/db/safe-query";
 
 export const dynamic = "force-dynamic";
 
-const baseFilters = { sort: "protein_efficiency_desc" as const, limit: 6, offset: 0 };
+const baseFilters = { scope: "meals" as const, sort: "protein_efficiency_desc" as const, limit: 6, offset: 0 };
 
 export default async function HomePage() {
   const [restaurants, efficient, protein] = await Promise.all([
@@ -26,7 +26,7 @@ export default async function HomePage() {
         <section>
           <div className="section-heading">
             <div><span className="section-kicker">Cut smarter</span><h2>Best protein per calorie</h2></div>
-            <Link href="/foods?sort=protein_efficiency_desc&maxCalories=700&minProtein=20">View all <span aria-hidden="true">→</span></Link>
+            <Link href="/foods?scope=meals&sort=protein_efficiency_desc&maxCalories=700&minProtein=20">View all <span aria-hidden="true">→</span></Link>
           </div>
           {efficient.data.items.length ? (
             <div className="food-grid">{efficient.data.items.map((food, index) => <FoodCard key={food.id} food={food} rank={index + 1} />)}</div>
@@ -35,15 +35,15 @@ export default async function HomePage() {
         <section className="goal-strip">
           <div><span className="section-kicker">Start with your goal</span><h2>One tap. Useful answers.</h2></div>
           <div className="goal-links">
-            <Link href="/foods?maxCalories=500&sort=protein_desc"><strong>≤500</strong><span>calorie picks</span></Link>
-            <Link href="/foods?minProtein=40&sort=calories_asc"><strong>40g+</strong><span>protein meals</span></Link>
-            <Link href="/foods?maxCarbs=20&sort=protein_desc"><strong>Low</strong><span>carb options</span></Link>
+            <Link href="/foods?scope=meals&maxCalories=500&sort=protein_desc"><strong>≤500</strong><span>calorie picks</span></Link>
+            <Link href="/foods?scope=meals&minProtein=40&sort=calories_asc"><strong>40g+</strong><span>protein meals</span></Link>
+            <Link href="/foods?scope=meals&maxCarbs=20&sort=protein_desc"><strong>Low</strong><span>carb options</span></Link>
           </div>
         </section>
         <section>
           <div className="section-heading">
             <div><span className="section-kicker">Big numbers</span><h2>Protein monsters</h2></div>
-            <Link href="/foods?sort=protein_desc&minProtein=40">View all <span aria-hidden="true">→</span></Link>
+            <Link href="/foods?scope=meals&sort=protein_desc&minProtein=40">View all <span aria-hidden="true">→</span></Link>
           </div>
           {protein.data.items.length ? (
             <div className="food-grid">{protein.data.items.map((food) => <FoodCard key={food.id} food={food} />)}</div>

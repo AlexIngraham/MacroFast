@@ -1,3 +1,5 @@
+import type { FoodScope, ItemRole } from "@/lib/item-role";
+
 export const SOURCE_TYPES = ["html", "json", "pdf", "csv", "manual"] as const;
 export type SourceType = (typeof SOURCE_TYPES)[number];
 
@@ -57,6 +59,7 @@ export interface FoodListItem extends NutritionValues {
   restaurantId: string;
   restaurantName: string;
   restaurantSlug: string;
+  itemRole: ItemRole;
 }
 
 export interface RestaurantSummary {
@@ -86,6 +89,7 @@ export interface FoodFilters {
   query?: string;
   restaurant?: string;
   category?: string;
+  scope: FoodScope;
   maxCalories?: number;
   minProtein?: number;
   maxFat?: number;

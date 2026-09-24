@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { FoodListItem } from "@/lib/domain";
+import { itemRoleLabel } from "@/lib/item-role";
 import { classifyFood, formatMetric, proteinPer100Calories } from "@/lib/metrics";
 
 export function FoodCard({ food, rank }: { food: FoodListItem; rank?: number }) {
@@ -10,7 +11,10 @@ export function FoodCard({ food, rank }: { food: FoodListItem; rank?: number }) 
     <article className="food-card">
       <div className="food-card-top">
         {rank ? <span className="rank">#{rank}</span> : null}
-        {label ? <span className="pill">{label}</span> : <span className="pill pill-muted">{food.category}</span>}
+        <div className="card-badges">
+          <span className="role-badge">{itemRoleLabel(food.itemRole)}</span>
+          {label ? <span className="pill">{label}</span> : null}
+        </div>
       </div>
       <Link className="food-card-title" href={`/food/${food.slug}`}>{food.name}</Link>
       <Link className="restaurant-link" href={`/restaurants/${food.restaurantSlug}`}>{food.restaurantName}</Link>

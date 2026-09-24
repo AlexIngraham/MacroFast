@@ -11,6 +11,7 @@ export function HeroSearch() {
           <p>Find fast-food orders that fit your calorie budget and protein target in seconds.</p>
         </div>
         <form className="search-panel" action="/foods" method="get">
+          <input type="hidden" name="scope" value="meals" />
           <label htmlFor="home-search">Search foods or restaurants</label>
           <div className="search-row">
             <input id="home-search" name="q" placeholder="Try “50g protein under 600 calories”" />
@@ -19,13 +20,13 @@ export function HeroSearch() {
           <div className="quick-targets">
             <span>Calories</span>
             {calorieTargets.map((target) => (
-              <a key={target} href={`/foods?maxCalories=${target}`}>≤ {target}</a>
+              <a key={target} href={`/foods?scope=meals&maxCalories=${target}`}>≤ {target}</a>
             ))}
           </div>
           <div className="quick-targets">
             <span>Protein</span>
             {proteinTargets.map((target) => (
-              <a key={target} href={`/foods?minProtein=${target}`}>{target}g+</a>
+              <a key={target} href={`/foods?scope=meals&minProtein=${target}`}>{target}g+</a>
             ))}
           </div>
         </form>
