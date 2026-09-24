@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/app/globals.css";
 import { SiteHeader } from "@/components/site-header";
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <a href="/admin/data-health">Data health</a>
           </div>
         </footer>
+        <SpeedInsights />
       </body>
     </html>
   );
